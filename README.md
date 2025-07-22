@@ -19,7 +19,7 @@ The project will be divided into three parts:
 ![Data pipeline architecture diagram](pokemon-pipeline.png "Architeture Diagram")
 
 1.  The data source for this project is the [PokeAPI](https://pokeapi.co/docs/v2), from which data will be ingested. The API provides multiple endpoints, each offering different categories of Pokémon-related data. Incoming data will be in JSON format.
-2.  The ingestion will be performed as a daily batch process using Dataproc with Apache Spark.
+2.  The ingestion will be performed as a daily batch process using python.
 3.  Data collected from the API endpoints is stored in a GCS data lake in the following structure and format:
 
 ```
@@ -40,7 +40,7 @@ The project will be divided into three parts:
 4. Once the data is ingested and stored in Google Cloud Storage (GCS), a Storage Integration is set up in Snowflake to create an external stage. This allows Snowflake to securely read data directly from the GCS bucket for further processing and loading.
 5. Data transformations are performed using dbt, structured according to the Medallion Architecture. This approach organizes data into Bronze (raw), Silver (cleaned), and Gold (aggregated or business-ready) layers for better modularity and scalability.
 6. Aggregated data from the Gold layer is visualized using Tableau to generate insightful dashboards and reports.
-7. Data orchestration is managed using Cloud Composer (Airflow), which schedules and manages ingestion and transformation workflows.
+7. Data orchestration is managed using Cloud Composer (Airflow), which schedules and manages ingestion workflows.
 8. Both orchestration (DAGs) and transformation (dbt) workflows are version-controlled and deployed through GitHub Actions.
 
 ---
